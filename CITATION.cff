@@ -7,50 +7,48 @@ type: software
 license: MIT
 
 authors:
-
-* name: "SamuraiWriter7"
+  - name: "SamuraiWriter7"
 
 repository-code: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
 
 abstract: >
-Royalty OS v0.2 is an experimental event-based architecture for connecting
-traceable human-originated thought to dynamic value circulation. It extends
-the static Royalty OS v0.1 recognition model into an append-only value event
-log with modular schemas, AI-assisted detection, human review, dynamic value
-signals, allocation decisions, and return history. This draft defines the
-initial architecture, event model, review layer, allocation layer, modular
-JSON Schemas, YAML examples, validation script, and automated GitHub Actions
-workflow for Royalty OS v0.2.
+  Royalty OS v0.2 is an experimental event-based architecture for connecting
+  traceable human-originated thought to dynamic value circulation. It extends
+  the static Royalty OS v0.1 recognition model into an append-only value event
+  log with modular schemas, AI-assisted detection, human review, dynamic value
+  signals, allocation decisions, and return history. This draft defines the
+  initial architecture, event model, review layer, allocation layer, modular
+  JSON Schemas, YAML examples, validation script, and automated GitHub Actions
+  workflow for Royalty OS v0.2.
 
 keywords:
-
-* "Royalty OS"
-* "Royalty OS v0.2"
-* "Trace Protocol"
-* "Epicenter Network"
-* "AI"
-* "Artificial Intelligence"
-* "event-based architecture"
-* "value circulation"
-* "value event log"
-* "origin trace"
-* "human-originated thought"
-* "AI attribution"
-* "creator economy"
-* "digital sovereignty"
-* "modular schema"
-* "JSON Schema"
-* "YAML"
-* "human review"
-* "allocation layer"
-* "return history"
+  - "Royalty OS"
+  - "Royalty OS v0.2"
+  - "Trace Protocol"
+  - "Epicenter Network"
+  - "AI"
+  - "Artificial Intelligence"
+  - "event-based architecture"
+  - "value circulation"
+  - "value event log"
+  - "origin trace"
+  - "human-originated thought"
+  - "AI attribution"
+  - "creator economy"
+  - "digital sovereignty"
+  - "modular schema"
+  - "JSON Schema"
+  - "YAML"
+  - "human review"
+  - "allocation layer"
+  - "return history"
 
 preferred-citation:
-type: software
-title: "Royalty OS v0.2: Event-Based Trace-to-Value Circulation Architecture"
-authors:
-- name: "SamuraiWriter7"
-version: "0.2.0-draft"
-date-released: "2026-06-04"
-repository-code: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
-license: MIT
+  type: software
+  title: "Royalty OS v0.2: Event-Based Trace-to-Value Circulation Architecture"
+  authors:
+    - name: "SamuraiWriter7"
+  version: "0.2.0-draft"
+  date-released: "2026-06-04"
+  repository-code: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
+  license: MIT
