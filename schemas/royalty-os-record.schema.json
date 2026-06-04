@@ -1,0 +1,223 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/schemas/royalty-os-record.schema.json",
+"title": "Royalty OS v0.2 Root Record Schema",
+"description": "Root JSON Schema for validating Royalty OS v0.2 records composed of origin, trace, value event log, review records, allocation decisions, and return records.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"royalty_os_version",
+"origin",
+"trace",
+"value_event_log",
+"status"
+],
+"properties": {
+"royalty_os_version": {
+"type": "string",
+"description": "Royalty OS record version.",
+"enum": [
+"0.2"
+]
+},
+"record_id": {
+"type": "string",
+"description": "Stable identifier for this complete Royalty OS v0.2 record.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"title": {
+"type": "string",
+"description": "Human-readable title for this Royalty OS record."
+},
+"origin": {
+"$ref": "origin.schema.json"
+},
+"trace": {
+"$ref": "trace.schema.json"
+},
+"value_event_log": {
+"type": "object",
+"description": "Append-only value event log for this Royalty OS v0.2 record.",
+"additionalProperties": false,
+"required": [
+"log_id",
+"origin_id",
+"trace_id",
+"events"
+],
+"properties": {
+"log_id": {
+"type": "string",
+"description": "Stable identifier for the value event log.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"origin_id": {
+"type": "string",
+"description": "Origin identifier connected to this event log.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"trace_id": {
+"type": "string",
+"description": "Trace identifier connected to this event log.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"events": {
+"type": "array",
+"description": "Append-only list of value events.",
+"minItems": 1,
+"items": {
+"$ref": "value-event.schema.json"
+}
+},
+"created_at": {
+"type": "string",
+"description": "Timestamp when this event log was created.",
+"format": "date-time"
+},
+"updated_at": {
+"type": "string",
+"description": "Timestamp when this event log was last updated.",
+"format": "date-time"
+},
+"log_status": {
+"type": "string",
+"description": "Lifecycle status of the value event log.",
+"enum": [
+"draft",
+"active",
+"deprecated",
+"archived"
+]
+},
+"append_only": {
+"type": "boolean",
+"description": "Whether this log follows the append-only principle.",
+"const": true
+},
+"notes": {
+"type": "string",
+"description": "Additional notes about this value event log."
+}
+}
+},
+"reviews": {
+"type": "array",
+"description": "Review records connected to events in this Royalty OS record.",
+"items": {
+"$ref": "review.schema.json"
+},
+"uniqueItems": true
+},
+"allocation_decisions": {
+"type": "array",
+"description": "Allocation decisions connected to reviewed value events.",
+"items": {
+"$ref": "allocation.schema.json"
+},
+"uniqueItems": true
+},
+"return_records": {
+"type": "array",
+"description": "Return records confirming completed recognition or value return.",
+"items": {
+"$ref": "return.schema.json"
+},
+"uniqueItems": true
+},
+"metadata": {
+"type": "object",
+"description": "Optional metadata about this complete Royalty OS v0.2 record.",
+"additionalProperties": false,
+"properties": {
+"created_by": {
+"type": "string"
+},
+"created_at": {
+"type": "string",
+"format": "date-time"
+},
+"updated_at": {
+"type": "string",
+"format": "date-time"
+},
+"repository": {
+"type": "string",
+"format": "uri"
+},
+"license": {
+"type": "string"
+},
+"language": {
+"type": "string",
+"minLength": 2
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"status": {
+"type": "string",
+"description": "Lifecycle status of the complete Royalty OS v0.2 record.",
+"enum": [
+"draft",
+"active",
+"deprecated",
+"archived"
+]
+}
+},
+"allOf": [
+{
+"if": {
+"properties": {
+"value_event_log": {
+"properties": {
+"log_status": {
+"const": "active"
+}
+},
+"required": [
+"log_status"
+]
+}
+},
+"required": [
+"value_event_log"
+]
+},
+"then": {
+"properties": {
+"status": {
+"enum": [
+"active"
+]
+}
+}
+}
+},
+{
+"if": {
+"properties": {
+"status": {
+"const": "active"
+}
+},
+"required": [
+"status"
+]
+},
+"then": {
+"required": [
+"record_id",
+"title",
+"metadata"
+]
+}
+}
+]
+}
