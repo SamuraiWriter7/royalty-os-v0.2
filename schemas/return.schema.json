@@ -1,0 +1,342 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/schemas/return.schema.json",
+"title": "Royalty OS v0.2 Return Record Schema",
+"description": "JSON Schema module for validating return records in Royalty OS v0.2.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"return_id",
+"allocation_id",
+"return_type",
+"recipient",
+"completed_at",
+"status"
+],
+"properties": {
+"return_id": {
+"type": "string",
+"description": "A stable identifier for this return record.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"allocation_id": {
+"type": "string",
+"description": "The allocation decision identifier that this return record fulfills.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"origin_id": {
+"type": "string",
+"description": "The origin identifier connected to this return record.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"trace_id": {
+"type": "string",
+"description": "The trace identifier connected to this return record.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"return_type": {
+"type": "string",
+"description": "The type of value return completed or recorded.",
+"enum": [
+"citation",
+"linkback",
+"credit",
+"conceptual_attribution",
+"repository_reference",
+"acknowledgement",
+"collaboration_offer",
+"licensing_request",
+"point_allocation",
+"token_reward",
+"q_point_allocation",
+"resonance_score_update",
+"financial_compensation",
+"royalty_payment"
+]
+},
+"recipient": {
+"type": "object",
+"description": "The recipient of the returned value.",
+"additionalProperties": false,
+"required": [
+"recipient_type",
+"recipient_id"
+],
+"properties": {
+"recipient_type": {
+"type": "string",
+"enum": [
+"human",
+"organization",
+"repository",
+"project",
+"protocol",
+"collective",
+"unknown"
+]
+},
+"recipient_id": {
+"type": "string",
+"minLength": 1
+},
+"recipient_role": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"url": {
+"type": "string",
+"format": "uri"
+}
+}
+},
+"completed_at": {
+"type": "string",
+"description": "Timestamp when the return was completed or recorded.",
+"format": "date-time"
+},
+"status": {
+"type": "string",
+"description": "Lifecycle status of the return record.",
+"enum": [
+"pending",
+"completed",
+"failed",
+"disputed",
+"superseded",
+"archived"
+]
+},
+"evidence_url": {
+"type": "string",
+"description": "URL proving or showing the completed return.",
+"format": "uri"
+},
+"evidence_description": {
+"type": "string",
+"description": "Description of evidence supporting the return record."
+},
+"evidence": {
+"type": "object",
+"description": "Structured evidence supporting the completed return.",
+"additionalProperties": false,
+"required": [
+"evidence_type"
+],
+"properties": {
+"evidence_type": {
+"type": "string",
+"enum": [
+"url",
+"quote",
+"repository_commit",
+"citation",
+"screenshot_reference",
+"hash",
+"doi",
+"manual_note",
+"payment_record",
+"platform_record",
+"unknown"
+]
+},
+"url": {
+"type": "string",
+"format": "uri"
+},
+"description": {
+"type": "string"
+},
+"quote": {
+"type": "string"
+},
+"repository_commit": {
+"type": "string"
+},
+"hash": {
+"type": "string"
+},
+"doi": {
+"type": "string"
+},
+"manual_note": {
+"type": "string"
+},
+"payment_record": {
+"type": "string"
+},
+"platform_record": {
+"type": "string"
+}
+}
+},
+"return_amount": {
+"description": "Optional monetary, point, or token amount associated with the return.",
+"type": [
+"number",
+"null"
+],
+"minimum": 0
+},
+"return_unit": {
+"type": [
+"string",
+"null"
+],
+"description": "Unit for the return amount, such as USD, JPY, Q_POINT, TOKEN, or null for non-quantified returns."
+},
+"related_events": {
+"type": "array",
+"description": "Value event identifiers related to this return record.",
+"items": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"uniqueItems": true
+},
+"related_returns": {
+"type": "array",
+"description": "Other return record identifiers related to this return.",
+"items": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"uniqueItems": true
+},
+"created_at": {
+"type": "string",
+"description": "Timestamp when this return record was created.",
+"format": "date-time"
+},
+"updated_at": {
+"type": "string",
+"description": "Timestamp when this return record was last updated.",
+"format": "date-time"
+},
+"notes": {
+"type": "string",
+"description": "Additional notes about this return record."
+}
+},
+"allOf": [
+{
+"if": {
+"properties": {
+"return_type": {
+"enum": [
+"financial_compensation",
+"royalty_payment"
+]
+}
+},
+"required": [
+"return_type"
+]
+},
+"then": {
+"required": [
+"return_amount",
+"return_unit"
+],
+"properties": {
+"return_amount": {
+"type": "number",
+"minimum": 0
+},
+"return_unit": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+},
+{
+"if": {
+"properties": {
+"return_type": {
+"enum": [
+"point_allocation",
+"q_point_allocation",
+"token_reward",
+"resonance_score_update"
+]
+}
+},
+"required": [
+"return_type"
+]
+},
+"then": {
+"required": [
+"return_amount",
+"return_unit"
+],
+"properties": {
+"return_amount": {
+"type": "number",
+"minimum": 0
+},
+"return_unit": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+},
+{
+"if": {
+"properties": {
+"status": {
+"const": "completed"
+}
+},
+"required": [
+"status"
+]
+},
+"then": {
+"anyOf": [
+{
+"required": [
+"evidence_url"
+]
+},
+{
+"required": [
+"evidence"
+]
+},
+{
+"required": [
+"evidence_description"
+]
+}
+]
+}
+},
+{
+"if": {
+"properties": {
+"status": {
+"const": "failed"
+}
+},
+"required": [
+"status"
+]
+},
+"then": {
+"required": [
+"notes"
+]
+}
+}
+]
+}
