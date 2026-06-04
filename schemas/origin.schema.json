@@ -1,0 +1,112 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/schemas/origin.schema.json",
+"title": "Royalty OS v0.2 Origin Record Schema",
+"description": "JSON Schema module for validating origin records in Royalty OS v0.2.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"origin_id",
+"origin_type",
+"title",
+"creator",
+"first_published",
+"primary_url"
+],
+"properties": {
+"origin_id": {
+"type": "string",
+"description": "A stable identifier for the origin.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"origin_type": {
+"type": "string",
+"description": "The type of human-originated source.",
+"enum": [
+"human_originated_thought",
+"question",
+"concept",
+"essay",
+"protocol",
+"specification",
+"technical_design",
+"philosophical_model",
+"creative_work",
+"research_note",
+"ai_assisted_human_originated_work"
+]
+},
+"title": {
+"type": "string",
+"description": "The title or name of the origin.",
+"minLength": 1
+},
+"creator": {
+"type": "string",
+"description": "The creator, originator, author, maintainer, or origin node associated with the origin.",
+"minLength": 1
+},
+"first_published": {
+"type": "string",
+"description": "The first known publication date of the origin in YYYY-MM-DD format.",
+"format": "date"
+},
+"primary_url": {
+"type": "string",
+"description": "The primary URL where the origin is published or recorded.",
+"format": "uri"
+},
+"description": {
+"type": "string",
+"description": "A short description of the origin."
+},
+"language": {
+"type": "string",
+"description": "The primary language of the origin, preferably using a BCP 47 language tag such as en or ja.",
+"minLength": 2
+},
+"license": {
+"type": "string",
+"description": "The license associated with the origin, if known."
+},
+"repository": {
+"type": "string",
+"description": "A repository URL associated with the origin, if applicable.",
+"format": "uri"
+},
+"related_origins": {
+"type": "array",
+"description": "Other origin identifiers related to this origin.",
+"items": {
+"type": "string",
+"minLength": 1
+},
+"uniqueItems": true
+},
+"created_at": {
+"type": "string",
+"description": "Timestamp when this origin record was created.",
+"format": "date-time"
+},
+"updated_at": {
+"type": "string",
+"description": "Timestamp when this origin record was last updated.",
+"format": "date-time"
+},
+"status": {
+"type": "string",
+"description": "Lifecycle status of the origin record.",
+"enum": [
+"draft",
+"active",
+"deprecated",
+"archived"
+]
+},
+"notes": {
+"type": "string",
+"description": "Additional notes about the origin."
+}
+}
+}
