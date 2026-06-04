@@ -255,6 +255,29 @@ def validate_value_event_log() -> bool:
     return passed
 
 # -----------------------------
+# Validate All Schema Files
+# -----------------------------
+def validate_all_schemas_loadable() -> bool:
+    """Validate that all JSON Schema files are syntactically valid schemas."""
+    print("Validating all schema files...")
+
+    passed = True
+
+    for schema_path in sorted(SCHEMA_DIR.glob("*.schema.json")):
+        try:
+            validate_schema(schema_path)
+            print(f"Schema valid: {schema_path.relative_to(REPO_ROOT)}")
+        except RuntimeError as exc:
+            print("")
+            print("Schema validation failed.")
+            print(exc)
+            print("")
+            passed = False
+
+    print("")
+    return passed
+
+# -----------------------------
 # Cross-file Consistency
 # -----------------------------
 def validate_cross_references() -> bool:
