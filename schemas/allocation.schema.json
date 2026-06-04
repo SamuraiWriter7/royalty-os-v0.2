@@ -1,0 +1,449 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/schemas/allocation.schema.json",
+"title": "Royalty OS v0.2 Allocation Decision Schema",
+"description": "JSON Schema module for validating allocation decisions in Royalty OS v0.2.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"allocation_id",
+"based_on_events",
+"origin_id",
+"trace_id",
+"allocation_type",
+"return_methods",
+"allocation_status",
+"created_at"
+],
+"properties": {
+"allocation_id": {
+"type": "string",
+"description": "A stable identifier for this allocation decision.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"based_on_events": {
+"type": "array",
+"description": "Event identifiers that this allocation decision is based on.",
+"minItems": 1,
+"items": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"uniqueItems": true
+},
+"origin_id": {
+"type": "string",
+"description": "The origin identifier connected to this allocation decision.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"trace_id": {
+"type": "string",
+"description": "The trace identifier connected to this allocation decision.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"allocation_type": {
+"type": "string",
+"description": "The type of allocation decision.",
+"enum": [
+"non_monetary",
+"monetary",
+"hybrid",
+"experimental"
+]
+},
+"return_methods": {
+"type": "array",
+"description": "Methods by which value should return to the origin.",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"citation",
+"linkback",
+"credit",
+"conceptual_attribution",
+"version_lineage",
+"repository_reference",
+"acknowledgement",
+"collaboration_offer",
+"licensing_request",
+"financial_compensation",
+"royalty_payment",
+"point_allocation",
+"token_reward",
+"q_point_allocation",
+"resonance_score_update"
+]
+},
+"uniqueItems": true
+},
+"allocation_status": {
+"type": "string",
+"description": "Lifecycle status of the allocation decision.",
+"enum": [
+"draft",
+"proposed",
+"pending_review",
+"approved",
+"rejected",
+"completed",
+"superseded",
+"disputed",
+"archived"
+]
+},
+"created_at": {
+"type": "string",
+"description": "Timestamp when this allocation decision was created.",
+"format": "date-time"
+},
+"updated_at": {
+"type": "string",
+"description": "Timestamp when this allocation decision was last updated.",
+"format": "date-time"
+},
+"allocation_policy": {
+"type": "object",
+"description": "Policy used to determine this allocation decision.",
+"additionalProperties": false,
+"required": [
+"policy_id",
+"policy_type"
+],
+"properties": {
+"policy_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"policy_type": {
+"type": "string",
+"enum": [
+"origin_recognition_first",
+"review_required_before_allocation",
+"non_monetary_first",
+"human_review_required_for_high_value",
+"manual_approval_required",
+"q_point_assisted",
+"experimental_dynamic_allocation"
+]
+},
+"description": {
+"type": "string"
+}
+}
+},
+"recipient": {
+"type": "object",
+"description": "Primary recipient of the allocation decision.",
+"additionalProperties": false,
+"required": [
+"recipient_type",
+"recipient_id"
+],
+"properties": {
+"recipient_type": {
+"type": "string",
+"enum": [
+"human",
+"organization",
+"repository",
+"project",
+"protocol",
+"collective",
+"unknown"
+]
+},
+"recipient_id": {
+"type": "string",
+"minLength": 1
+},
+"recipient_role": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"url": {
+"type": "string",
+"format": "uri"
+}
+}
+},
+"recipients": {
+"type": "array",
+"description": "Multiple recipients for experimental multi-recipient allocation.",
+"minItems": 1,
+"items": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"recipient_type",
+"recipient_id"
+],
+"properties": {
+"recipient_type": {
+"type": "string",
+"enum": [
+"human",
+"organization",
+"repository",
+"project",
+"protocol",
+"collective",
+"unknown"
+]
+},
+"recipient_id": {
+"type": "string",
+"minLength": 1
+},
+"recipient_role": {
+"type": "string"
+},
+"allocation_share": {
+"type": "number",
+"minimum": 0,
+"maximum": 1
+},
+"name": {
+"type": "string"
+},
+"url": {
+"type": "string",
+"format": "uri"
+}
+}
+}
+},
+"allocation_reason": {
+"type": "string",
+"description": "Explanation of why this allocation decision was created."
+},
+"allocation_ratio": {
+"description": "Optional allocation ratio. Null is allowed when allocation is non-monetary or not yet defined.",
+"type": [
+"number",
+"null"
+],
+"minimum": 0,
+"maximum": 1
+},
+"priority": {
+"type": "string",
+"description": "Priority level of this allocation decision.",
+"enum": [
+"low",
+"medium",
+"high",
+"critical"
+]
+},
+"review_reference": {
+"type": "object",
+"description": "Reference to a review record supporting this allocation decision.",
+"additionalProperties": false,
+"required": [
+"review_id",
+"review_status"
+],
+"properties": {
+"review_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"review_status": {
+"type": "string",
+"enum": [
+"not_required",
+"pending",
+"approved",
+"rejected",
+"needs_more_evidence",
+"disputed",
+"superseded",
+"archived"
+]
+},
+"confidence": {
+"type": "number",
+"minimum": 0,
+"maximum": 1
+}
+}
+},
+"value_signal_reference": {
+"type": "object",
+"description": "Reference to the value signal used for allocation.",
+"additionalProperties": false,
+"required": [
+"signal_type",
+"signal_strength"
+],
+"properties": {
+"signal_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"signal_type": {
+"type": "string",
+"enum": [
+"citation",
+"linkback",
+"conceptual_reference",
+"structural_dependency",
+"implementation_dependency",
+"translation",
+"summary",
+"derivative_work",
+"commercial_use",
+"educational_use",
+"research_use",
+"ai_reference",
+"community_recognition"
+]
+},
+"signal_strength": {
+"type": "string",
+"enum": [
+"low",
+"medium",
+"high",
+"critical"
+]
+},
+"confidence": {
+"type": "number",
+"minimum": 0,
+"maximum": 1
+}
+}
+},
+"expected_return": {
+"type": "object",
+"description": "Expected return outcome for this allocation decision.",
+"additionalProperties": false,
+"properties": {
+"expected_return_type": {
+"type": "string",
+"enum": [
+"citation",
+"linkback",
+"credit",
+"conceptual_attribution",
+"repository_reference",
+"acknowledgement",
+"point_allocation",
+"token_reward",
+"financial_compensation",
+"royalty_payment",
+"mixed"
+]
+},
+"expected_completed_by": {
+"type": "string",
+"format": "date-time"
+},
+"description": {
+"type": "string"
+}
+}
+},
+"notes": {
+"type": "string",
+"description": "Additional notes about this allocation decision."
+}
+},
+"allOf": [
+{
+"if": {
+"properties": {
+"allocation_type": {
+"const": "monetary"
+}
+},
+"required": [
+"allocation_type"
+]
+},
+"then": {
+"properties": {
+"return_methods": {
+"contains": {
+"enum": [
+"financial_compensation",
+"royalty_payment",
+"licensing_request"
+]
+}
+}
+}
+}
+},
+{
+"if": {
+"properties": {
+"allocation_type": {
+"const": "non_monetary"
+}
+},
+"required": [
+"allocation_type"
+]
+},
+"then": {
+"properties": {
+"allocation_ratio": {
+"type": [
+"null",
+"number"
+]
+}
+}
+}
+},
+{
+"if": {
+"properties": {
+"priority": {
+"enum": [
+"high",
+"critical"
+]
+}
+},
+"required": [
+"priority"
+]
+},
+"then": {
+"required": [
+"review_reference"
+]
+}
+},
+{
+"if": {
+"required": [
+"recipients"
+]
+},
+"then": {
+"properties": {
+"allocation_type": {
+"enum": [
+"hybrid",
+"experimental"
+]
+}
+}
+}
+}
+]
+}
