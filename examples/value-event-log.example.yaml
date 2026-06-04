@@ -1,0 +1,288 @@
+log_id: "log-royalty-os-v0.2-001"
+origin_id: "epicenter-network-001"
+trace_id: "trace-protocol-001"
+
+append_only: true
+
+created_at: "2026-06-04T00:20:00Z"
+updated_at: "2026-06-04T01:30:00Z"
+
+log_status: "active"
+
+events:
+
+* event_id: "event-001"
+  event_type: "origin_registered"
+  event_time: "2026-06-04T00:00:00Z"
+  event_index: 1
+  origin_id: "epicenter-network-001"
+  trace_id: "trace-protocol-001"
+  status: "completed"
+
+  actor:
+  actor_type: "human"
+  actor_id: "SamuraiWriter7"
+  role: "originator"
+  name: "SamuraiWriter7"
+
+  target:
+  target_type: "article"
+  title: "Epicenter Network"
+  url: "https://example.com/epicenter-network"
+
+  evidence:
+  evidence_type: "url"
+  url: "https://example.com/epicenter-network"
+  description: "The original article defining the Epicenter Network concept."
+
+  notes: >
+  This event registers the Epicenter Network as the first origin
+  in the Royalty OS lineage.
+
+* event_id: "event-002"
+  event_type: "trace_created"
+  event_time: "2026-06-04T00:10:00Z"
+  event_index: 2
+  origin_id: "epicenter-network-001"
+  trace_id: "trace-protocol-001"
+  status: "completed"
+
+  actor:
+  actor_type: "human"
+  actor_id: "SamuraiWriter7"
+  role: "trace_creator"
+  name: "SamuraiWriter7"
+
+  target:
+  target_type: "article"
+  title: "Trace Protocol"
+  url: "https://example.com/trace-protocol"
+
+  evidence:
+  evidence_type: "url"
+  url: "https://example.com/trace-protocol"
+  description: "The article defining Trace Protocol as a structure for preserving the origin of human thought."
+
+  value_signal:
+  signal_type: "conceptual_reference"
+  signal_strength: "high"
+  signal_score: 0.9
+  confidence: 0.9
+  review_method: "human_review"
+  notes: "Trace Protocol directly builds on the Epicenter Network concept."
+
+  notes: >
+  This event records the creation of Trace Protocol as the second
+  layer after the Epicenter Network.
+
+* event_id: "event-003"
+  event_type: "reference_detected"
+  event_time: "2026-06-04T00:30:00Z"
+  event_index: 3
+  origin_id: "epicenter-network-001"
+  trace_id: "trace-protocol-001"
+  status: "pending_review"
+
+  actor:
+  actor_type: "human"
+  actor_id: "SamuraiWriter7"
+  role: "detector"
+  name: "SamuraiWriter7"
+
+  target:
+  target_type: "article"
+  title: "Royalty OS"
+  url: "https://example.com/royalty-os"
+
+  evidence:
+  evidence_type: "url"
+  url: "https://example.com/royalty-os"
+  description: "The Royalty OS article references both Epicenter Network and Trace Protocol."
+
+  value_signal:
+  signal_type: "conceptual_reference"
+  signal_strength: "high"
+  signal_score: 0.88
+  confidence: 0.85
+  review_method: "self_declared"
+  notes: "Royalty OS conceptually depends on Epicenter Network and Trace Protocol."
+
+  review:
+  human_review_required: true
+  ai_assisted: false
+  status: "pending"
+  reviewer: null
+  notes: "Human review is required before allocation."
+
+  related_events:
+
+  * "event-001"
+  * "event-002"
+
+  notes: >
+  This event detects the conceptual reference from Royalty OS back
+  to the Epicenter Network and Trace Protocol lineage.
+
+* event_id: "event-004"
+  event_type: "human_review_completed"
+  event_time: "2026-06-04T00:45:00Z"
+  event_index: 4
+  origin_id: "epicenter-network-001"
+  trace_id: "trace-protocol-001"
+  status: "approved"
+
+  actor:
+  actor_type: "human"
+  actor_id: "SamuraiWriter7"
+  role: "reviewer"
+  name: "SamuraiWriter7"
+
+  target:
+  target_type: "article"
+  title: "Royalty OS"
+  url: "https://example.com/royalty-os"
+
+  evidence:
+  evidence_type: "manual_note"
+  manual_note: "The Royalty OS article directly derives its structure from Epicenter Network and Trace Protocol."
+  description: "Manual review confirms the conceptual dependency."
+
+  value_signal:
+  signal_type: "conceptual_reference"
+  signal_strength: "high"
+  signal_score: 0.9
+  confidence: 0.9
+  review_method: "human_review"
+  notes: "Human review confirms a direct conceptual lineage."
+
+  review:
+  human_review_required: true
+  ai_assisted: false
+  status: "approved"
+  reviewer: "SamuraiWriter7"
+  notes: "The reference is valid and approved."
+
+  related_events:
+
+  * "event-003"
+
+  notes: >
+  This event records human approval of the conceptual reference.
+
+* event_id: "event-005"
+  event_type: "value_signal_updated"
+  event_time: "2026-06-04T01:00:00Z"
+  event_index: 5
+  origin_id: "epicenter-network-001"
+  trace_id: "trace-protocol-001"
+  status: "completed"
+
+  actor:
+  actor_type: "human"
+  actor_id: "SamuraiWriter7"
+  role: "maintainer"
+  name: "SamuraiWriter7"
+
+  target:
+  target_type: "article"
+  title: "Royalty OS"
+  url: "https://example.com/royalty-os"
+
+  evidence:
+  evidence_type: "manual_note"
+  manual_note: "The value signal was updated after human review."
+  description: "The reviewed event confirms high conceptual dependency."
+
+  value_signal:
+  signal_type: "conceptual_reference"
+  signal_strength: "high"
+  signal_score: 0.92
+  confidence: 0.9
+  review_method: "human_review"
+  notes: "The value signal remains high after review."
+
+  related_events:
+
+  * "event-003"
+  * "event-004"
+
+  notes: >
+  This event records the updated value signal after review.
+
+* event_id: "event-006"
+  event_type: "allocation_decision_created"
+  event_time: "2026-06-04T01:15:00Z"
+  event_index: 6
+  origin_id: "epicenter-network-001"
+  trace_id: "trace-protocol-001"
+  status: "approved"
+
+  actor:
+  actor_type: "human"
+  actor_id: "SamuraiWriter7"
+  role: "maintainer"
+  name: "SamuraiWriter7"
+
+  target:
+  target_type: "repository"
+  title: "Royalty OS v0.2"
+  url: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
+
+  evidence:
+  evidence_type: "manual_note"
+  manual_note: "The approved value signal supports non-monetary origin recognition."
+  description: "Allocation decision created after review and value signal update."
+
+  allocation_reference:
+  allocation_id: "allocation-001"
+  status: "approved"
+
+  related_events:
+
+  * "event-004"
+  * "event-005"
+
+  notes: >
+  This event creates an approved allocation decision for non-monetary
+  return methods such as citation, linkback, and conceptual attribution.
+
+* event_id: "event-007"
+  event_type: "return_recorded"
+  event_time: "2026-06-04T01:30:00Z"
+  event_index: 7
+  origin_id: "epicenter-network-001"
+  trace_id: "trace-protocol-001"
+  status: "completed"
+
+  actor:
+  actor_type: "human"
+  actor_id: "SamuraiWriter7"
+  role: "maintainer"
+  name: "SamuraiWriter7"
+
+  target:
+  target_type: "repository"
+  title: "Royalty OS v0.2"
+  url: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
+
+  evidence:
+  evidence_type: "url"
+  url: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
+  description: "Repository documentation records the lineage from Epicenter Network to Trace Protocol to Royalty OS."
+
+  return_reference:
+  return_id: "return-001"
+  return_type: "repository_reference"
+  status: "completed"
+
+  related_events:
+
+  * "event-006"
+
+  notes: >
+  This event records completed non-monetary return through visible
+  repository reference and lineage preservation.
+
+notes: >
+This value event log demonstrates the Royalty OS v0.2 transition from
+static recognition to append-only event-based value circulation.
