@@ -1,0 +1,52 @@
+return_id: "return-001"
+allocation_id: "allocation-001"
+
+origin_id: "epicenter-network-001"
+trace_id: "trace-protocol-001"
+
+return_type: "repository_reference"
+
+recipient:
+recipient_type: "human"
+recipient_id: "SamuraiWriter7"
+recipient_role: "originator"
+name: "SamuraiWriter7"
+url: "https://github.com/SamuraiWriter7"
+
+completed_at: "2026-06-04T01:30:00Z"
+
+status: "completed"
+
+evidence_url: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
+
+evidence_description: >
+The Royalty OS v0.2 repository documentation records the lineage from
+Epicenter Network to Trace Protocol to Royalty OS, and preserves the
+origin through repository reference, conceptual attribution, and version
+lineage.
+
+evidence:
+evidence_type: "url"
+url: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
+description: >
+Repository documentation provides visible non-monetary return by
+acknowledging the Epicenter Network and Trace Protocol lineage.
+
+return_amount: null
+return_unit: null
+
+related_events:
+
+* "event-006"
+* "event-007"
+
+related_returns: []
+
+created_at: "2026-06-04T01:30:00Z"
+updated_at: "2026-06-04T01:30:00Z"
+
+notes: >
+This return record confirms that the allocation decision was fulfilled
+through non-monetary recognition. The return does not represent payment
+or legal royalty enforcement. It records completed value return through
+repository reference, lineage preservation, and visible origin recognition.
