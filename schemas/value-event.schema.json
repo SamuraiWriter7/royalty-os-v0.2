@@ -1,0 +1,538 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/schemas/value-event.schema.json",
+"title": "Royalty OS v0.2 Value Event Schema",
+"description": "JSON Schema module for validating value events in Royalty OS v0.2.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"event_id",
+"event_type",
+"event_time",
+"origin_id",
+"trace_id",
+"actor",
+"target",
+"evidence",
+"status"
+],
+"properties": {
+"event_id": {
+"type": "string",
+"description": "A stable identifier for this value event.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"event_type": {
+"type": "string",
+"description": "The type of value event.",
+"enum": [
+"origin_registered",
+"origin_updated",
+"origin_deprecated",
+"trace_created",
+"trace_updated",
+"trace_linked",
+"trace_version_updated",
+"reference_detected",
+"citation_added",
+"linkback_added",
+"conceptual_reference_detected",
+"structural_dependency_detected",
+"implementation_dependency_detected",
+"derivative_work_registered",
+"translation_registered",
+"summary_registered",
+"ai_reference_detected",
+"ai_similarity_detected",
+"ai_summary_detected",
+"ai_derivative_detected",
+"ai_assisted_review_created",
+"human_review_requested",
+"human_review_completed",
+"review_rejected",
+"review_disputed",
+"review_reopened",
+"value_signal_created",
+"value_signal_updated",
+"value_signal_downgraded",
+"value_signal_upgraded",
+"value_signal_disputed",
+"allocation_decision_created",
+"allocation_decision_updated",
+"allocation_decision_approved",
+"allocation_decision_rejected",
+"allocation_decision_superseded",
+"allocation_decision_disputed",
+"allocation_decision_completed",
+"return_recorded",
+"citation_return_completed",
+"linkback_return_completed",
+"credit_return_completed",
+"repository_reference_completed",
+"acknowledgement_completed",
+"point_allocation_recorded",
+"compensation_recorded",
+"correction_added",
+"event_retracted",
+"evidence_updated",
+"status_updated"
+]
+},
+"event_time": {
+"type": "string",
+"description": "Timestamp when the event occurred.",
+"format": "date-time"
+},
+"event_index": {
+"type": "integer",
+"description": "Optional ordering index for events with the same timestamp.",
+"minimum": 0
+},
+"origin_id": {
+"type": "string",
+"description": "The origin identifier related to this event.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"trace_id": {
+"type": "string",
+"description": "The trace identifier related to this event.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"actor": {
+"type": "object",
+"description": "The actor that caused, detected, recorded, or reviewed the event.",
+"additionalProperties": false,
+"required": [
+"actor_type",
+"actor_id"
+],
+"properties": {
+"actor_type": {
+"type": "string",
+"enum": [
+"human",
+"ai_system",
+"repository",
+"platform",
+"organization",
+"protocol",
+"unknown"
+]
+},
+"actor_id": {
+"type": "string",
+"minLength": 1
+},
+"role": {
+"type": "string",
+"description": "The role of the actor in this event."
+},
+"name": {
+"type": "string",
+"description": "Human-readable actor name."
+},
+"url": {
+"type": "string",
+"description": "Optional actor URL.",
+"format": "uri"
+}
+}
+},
+"target": {
+"type": "object",
+"description": "The target object or location affected by this event.",
+"additionalProperties": false,
+"required": [
+"target_type",
+"title"
+],
+"properties": {
+"target_type": {
+"type": "string",
+"enum": [
+"article",
+"repository",
+"specification",
+"protocol",
+"essay",
+"book",
+"ai_output",
+"dataset",
+"web_page",
+"social_post",
+"unknown"
+]
+},
+"title": {
+"type": "string",
+"minLength": 1
+},
+"url": {
+"type": "string",
+"format": "uri"
+},
+"repository": {
+"type": "string",
+"format": "uri"
+},
+"description": {
+"type": "string"
+},
+"hash": {
+"type": "string"
+}
+}
+},
+"evidence": {
+"type": "object",
+"description": "Evidence supporting this event.",
+"additionalProperties": false,
+"required": [
+"evidence_type"
+],
+"properties": {
+"evidence_type": {
+"type": "string",
+"enum": [
+"url",
+"quote",
+"repository_commit",
+"citation",
+"screenshot_reference",
+"hash",
+"doi",
+"manual_note",
+"ai_detection_report",
+"unknown"
+]
+},
+"url": {
+"type": "string",
+"format": "uri"
+},
+"description": {
+"type": "string"
+},
+"quote": {
+"type": "string"
+},
+"repository_commit": {
+"type": "string"
+},
+"hash": {
+"type": "string"
+},
+"doi": {
+"type": "string"
+},
+"manual_note": {
+"type": "string"
+},
+"ai_detection_report": {
+"type": "string"
+}
+}
+},
+"value_signal": {
+"type": "object",
+"description": "Optional value signal associated with this event.",
+"additionalProperties": false,
+"required": [
+"signal_type",
+"signal_strength"
+],
+"properties": {
+"signal_type": {
+"type": "string",
+"enum": [
+"citation",
+"linkback",
+"conceptual_reference",
+"structural_dependency",
+"implementation_dependency",
+"translation",
+"summary",
+"derivative_work",
+"commercial_use",
+"educational_use",
+"research_use",
+"ai_reference",
+"community_recognition"
+]
+},
+"signal_strength": {
+"type": "string",
+"enum": [
+"low",
+"medium",
+"high",
+"critical"
+]
+},
+"signal_score": {
+"type": "number",
+"minimum": 0,
+"maximum": 1
+},
+"confidence": {
+"type": "number",
+"minimum": 0,
+"maximum": 1
+},
+"review_method": {
+"type": "string",
+"enum": [
+"human_review",
+"ai_assisted_review",
+"automated_detection",
+"community_review",
+"self_declared",
+"unknown"
+]
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"review": {
+"type": "object",
+"description": "Optional review metadata attached to this event.",
+"additionalProperties": false,
+"required": [
+"human_review_required",
+"ai_assisted",
+"status"
+],
+"properties": {
+"human_review_required": {
+"type": "boolean"
+},
+"ai_assisted": {
+"type": "boolean"
+},
+"status": {
+"type": "string",
+"enum": [
+"not_required",
+"pending",
+"approved",
+"rejected",
+"needs_more_evidence",
+"disputed"
+]
+},
+"reviewer": {
+"type": [
+"string",
+"null"
+]
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"allocation_reference": {
+"type": "object",
+"description": "Optional reference to an allocation decision connected to this event.",
+"additionalProperties": false,
+"required": [
+"allocation_id",
+"status"
+],
+"properties": {
+"allocation_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"status": {
+"type": "string",
+"enum": [
+"draft",
+"proposed",
+"pending_review",
+"approved",
+"rejected",
+"completed",
+"superseded",
+"disputed",
+"archived"
+]
+}
+}
+},
+"return_reference": {
+"type": "object",
+"description": "Optional reference to a return record connected to this event.",
+"additionalProperties": false,
+"required": [
+"return_id",
+"return_type",
+"status"
+],
+"properties": {
+"return_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"return_type": {
+"type": "string",
+"enum": [
+"citation",
+"linkback",
+"credit",
+"conceptual_attribution",
+"repository_reference",
+"acknowledgement",
+"point_allocation",
+"token_reward",
+"financial_compensation",
+"royalty_payment"
+]
+},
+"status": {
+"type": "string",
+"enum": [
+"pending",
+"completed",
+"failed",
+"disputed",
+"superseded",
+"archived"
+]
+}
+}
+},
+"related_events": {
+"type": "array",
+"description": "Other event identifiers related to this event.",
+"items": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"uniqueItems": true
+},
+"correction": {
+"type": "object",
+"description": "Correction information when this event corrects a previous event.",
+"additionalProperties": false,
+"required": [
+"corrected_event_id",
+"correction_reason"
+],
+"properties": {
+"corrected_event_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"correction_reason": {
+"type": "string",
+"minLength": 1
+},
+"corrected_field": {
+"type": "string"
+},
+"previous_value": {},
+"new_value": {}
+}
+},
+"dispute": {
+"type": "object",
+"description": "Dispute information when this event disputes a previous event or review.",
+"additionalProperties": false,
+"required": [
+"disputed_event_id",
+"dispute_reason",
+"raised_by"
+],
+"properties": {
+"disputed_event_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"disputed_review_id": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"dispute_reason": {
+"type": "string",
+"minLength": 1
+},
+"raised_by": {
+"type": "string",
+"minLength": 1
+}
+}
+},
+"status": {
+"type": "string",
+"description": "Lifecycle status of the value event.",
+"enum": [
+"draft",
+"pending",
+"pending_review",
+"approved",
+"rejected",
+"disputed",
+"completed",
+"superseded",
+"retracted",
+"archived"
+]
+},
+"notes": {
+"type": "string",
+"description": "Additional notes about this event."
+}
+},
+"allOf": [
+{
+"if": {
+"properties": {
+"event_type": {
+"const": "correction_added"
+}
+},
+"required": [
+"event_type"
+]
+},
+"then": {
+"required": [
+"correction"
+]
+}
+},
+{
+"if": {
+"properties": {
+"event_type": {
+"enum": [
+"review_disputed",
+"value_signal_disputed",
+"allocation_decision_disputed"
+]
+}
+},
+"required": [
+"event_type"
+]
+},
+"then": {
+"required": [
+"dispute"
+]
+}
+}
+]
+}
