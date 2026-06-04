@@ -1,0 +1,28 @@
+origin_id: "epicenter-network-001"
+origin_type: "human_originated_thought"
+title: "Epicenter Network"
+creator: "SamuraiWriter7"
+first_published: "2026-06-04"
+primary_url: "https://example.com/epicenter-network"
+
+description: >
+The Epicenter Network is a decentralized human intelligence layer
+that defines humans as origin nodes of thought in the AI age.
+
+language: "en"
+license: "MIT"
+repository: "https://github.com/SamuraiWriter7/royalty-os-v0.2"
+
+related_origins:
+
+* "trace-protocol-001"
+* "royalty-os-001"
+
+created_at: "2026-06-04T00:00:00Z"
+updated_at: "2026-06-04T00:00:00Z"
+
+status: "active"
+
+notes: >
+This origin record represents the first conceptual source in the
+Royalty OS lineage: Epicenter Network -> Trace Protocol -> Royalty OS.
