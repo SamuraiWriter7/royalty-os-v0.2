@@ -1,0 +1,106 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/schemas/trace.schema.json",
+"title": "Royalty OS v0.2 Trace Record Schema",
+"description": "JSON Schema module for validating trace records in Royalty OS v0.2.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"trace_id",
+"origin_id",
+"core_question",
+"related_concepts",
+"lineage",
+"version"
+],
+"properties": {
+"trace_id": {
+"type": "string",
+"description": "A stable identifier for the trace record.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"origin_id": {
+"type": "string",
+"description": "The origin identifier connected to this trace.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"core_question": {
+"type": "string",
+"description": "The central question that generated or anchors this trace.",
+"minLength": 1
+},
+"related_concepts": {
+"type": "array",
+"description": "Concepts related to this trace.",
+"minItems": 1,
+"items": {
+"type": "string",
+"minLength": 1
+},
+"uniqueItems": true
+},
+"lineage": {
+"type": "array",
+"description": "Ordered conceptual lineage connected to this trace.",
+"minItems": 1,
+"items": {
+"type": "string",
+"minLength": 1
+}
+},
+"version": {
+"type": "string",
+"description": "Trace record version.",
+"minLength": 1
+},
+"trace_url": {
+"type": "string",
+"description": "Primary URL where this trace is published or recorded.",
+"format": "uri"
+},
+"derived_concepts": {
+"type": "array",
+"description": "Concepts derived from this trace.",
+"items": {
+"type": "string",
+"minLength": 1
+},
+"uniqueItems": true
+},
+"previous_versions": {
+"type": "array",
+"description": "Previous version identifiers of this trace.",
+"items": {
+"type": "string",
+"minLength": 1
+},
+"uniqueItems": true
+},
+"created_at": {
+"type": "string",
+"description": "Timestamp when this trace record was created.",
+"format": "date-time"
+},
+"updated_at": {
+"type": "string",
+"description": "Timestamp when this trace record was last updated.",
+"format": "date-time"
+},
+"status": {
+"type": "string",
+"description": "Lifecycle status of the trace record.",
+"enum": [
+"draft",
+"active",
+"deprecated",
+"archived"
+]
+},
+"notes": {
+"type": "string",
+"description": "Additional notes about the trace record."
+}
+}
+}
