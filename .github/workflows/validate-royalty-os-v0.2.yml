@@ -1,0 +1,37 @@
+name: Validate Royalty OS v0.2 Examples
+
+on:
+push:
+branches:
+- main
+- master
+pull_request:
+branches:
+- main
+- master
+workflow_dispatch:
+
+jobs:
+validate:
+name: Validate Royalty OS v0.2 YAML Examples
+runs-on: ubuntu-latest
+
+```
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.12"
+
+  - name: Install dependencies
+    run: |
+      python -m pip install --upgrade pip
+      pip install pyyaml jsonschema
+
+  - name: Validate examples
+    run: |
+      python scripts/validate_examples.py
+```
