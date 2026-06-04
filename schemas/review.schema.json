@@ -1,0 +1,334 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.com/schemas/review.schema.json",
+"title": "Royalty OS v0.2 Review Record Schema",
+"description": "JSON Schema module for validating review records in Royalty OS v0.2.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"review_id",
+"reviewed_event_id",
+"review_time",
+"reviewer",
+"review_status",
+"review_decision",
+"evidence_assessment",
+"confidence"
+],
+"properties": {
+"review_id": {
+"type": "string",
+"description": "A stable identifier for this review record.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"reviewed_event_id": {
+"type": "string",
+"description": "The value event identifier reviewed by this review record.",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9.*:-]*$"
+},
+"review_time": {
+"type": "string",
+"description": "Timestamp when the review was created or completed.",
+"format": "date-time"
+},
+"reviewer": {
+"type": "object",
+"description": "The reviewer that evaluated the event.",
+"additionalProperties": false,
+"required": [
+"reviewer_type",
+"reviewer_id"
+],
+"properties": {
+"reviewer_type": {
+"type": "string",
+"enum": [
+"human",
+"ai_system",
+"community",
+"organization",
+"protocol",
+"unknown"
+]
+},
+"reviewer_id": {
+"type": "string",
+"minLength": 1
+},
+"role": {
+"type": "string",
+"description": "The role of the reviewer."
+},
+"name": {
+"type": "string",
+"description": "Human-readable reviewer name."
+},
+"url": {
+"type": "string",
+"description": "Optional reviewer URL.",
+"format": "uri"
+}
+}
+},
+"review_status": {
+"type": "string",
+"description": "Lifecycle status of the review.",
+"enum": [
+"not_required",
+"pending",
+"approved",
+"rejected",
+"needs_more_evidence",
+"disputed",
+"superseded",
+"archived"
+]
+},
+"review_decision": {
+"type": "string",
+"description": "The review decision made by the reviewer.",
+"enum": [
+"valid_reference",
+"valid_conceptual_reference",
+"valid_structural_dependency",
+"valid_implementation_dependency",
+"valid_derivative_work",
+"insufficient_evidence",
+"not_meaningful_reference",
+"false_positive",
+"overclaimed_dependency",
+"requires_correction",
+"requires_dispute_resolution"
+]
+},
+"evidence_assessment": {
+"type": "object",
+"description": "Assessment of evidence supporting the reviewed event.",
+"additionalProperties": false,
+"required": [
+"evidence_sufficient",
+"evidence_quality"
+],
+"properties": {
+"evidence_sufficient": {
+"type": "boolean",
+"description": "Whether the evidence is sufficient for the review decision."
+},
+"evidence_quality": {
+"type": "string",
+"description": "Quality level of the evidence.",
+"enum": [
+"low",
+"medium",
+"high",
+"critical"
+]
+},
+"evidence_type": {
+"type": "string",
+"enum": [
+"url",
+"quote",
+"repository_commit",
+"citation",
+"screenshot_reference",
+"hash",
+"doi",
+"manual_note",
+"ai_detection_report",
+"multiple_sources",
+"unknown"
+]
+},
+"evidence_url": {
+"type": "string",
+"format": "uri"
+},
+"evidence_notes": {
+"type": "string"
+}
+}
+},
+"confidence": {
+"type": "number",
+"description": "Reviewer confidence score between 0 and 1.",
+"minimum": 0,
+"maximum": 1
+},
+"ai_assisted": {
+"type": "boolean",
+"description": "Whether AI assistance was used in this review."
+},
+"human_review_required": {
+"type": "boolean",
+"description": "Whether human review is required before allocation or return."
+},
+"recommended_signal_strength": {
+"type": "string",
+"description": "Recommended value signal strength after review.",
+"enum": [
+"low",
+"medium",
+"high",
+"critical"
+]
+},
+"recommended_allocation": {
+"type": "object",
+"description": "Optional allocation recommendation produced by the review.",
+"additionalProperties": false,
+"required": [
+"allocation_type",
+"return_methods"
+],
+"properties": {
+"allocation_type": {
+"type": "string",
+"enum": [
+"non_monetary",
+"monetary",
+"hybrid",
+"experimental"
+]
+},
+"return_methods": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"citation",
+"linkback",
+"credit",
+"conceptual_attribution",
+"version_lineage",
+"repository_reference",
+"acknowledgement",
+"collaboration_offer",
+"licensing_request",
+"financial_compensation",
+"royalty_payment",
+"point_allocation",
+"token_reward",
+"q_point_allocation",
+"resonance_score_update"
+]
+},
+"uniqueItems": true
+},
+"allocation_reason": {
+"type": "string"
+},
+"priority": {
+"type": "string",
+"enum": [
+"low",
+"medium",
+"high",
+"critical"
+]
+}
+}
+},
+"dispute_allowed": {
+"type": "boolean",
+"description": "Whether this review may be disputed."
+},
+"related_reviews": {
+"type": "array",
+"description": "Other review identifiers related to this review.",
+"items": {
+"type": "string",
+"minLength": 1,
+"pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+},
+"uniqueItems": true
+},
+"review_notes": {
+"type": "string",
+"description": "Additional notes about the review."
+}
+},
+"allOf": [
+{
+"if": {
+"properties": {
+"reviewer": {
+"properties": {
+"reviewer_type": {
+"const": "ai_system"
+}
+},
+"required": [
+"reviewer_type"
+]
+}
+},
+"required": [
+"reviewer"
+]
+},
+"then": {
+"properties": {
+"ai_assisted": {
+"const": true
+},
+"human_review_required": {
+"const": true
+}
+},
+"required": [
+"ai_assisted",
+"human_review_required"
+]
+}
+},
+{
+"if": {
+"properties": {
+"review_status": {
+"const": "needs_more_evidence"
+}
+},
+"required": [
+"review_status"
+]
+},
+"then": {
+"properties": {
+"evidence_assessment": {
+"properties": {
+"evidence_sufficient": {
+"const": false
+}
+},
+"required": [
+"evidence_sufficient"
+]
+}
+}
+}
+},
+{
+"if": {
+"properties": {
+"review_status": {
+"const": "approved"
+}
+},
+"required": [
+"review_status"
+]
+},
+"then": {
+"properties": {
+"confidence": {
+"minimum": 0.5
+}
+}
+}
+}
+]
+}
