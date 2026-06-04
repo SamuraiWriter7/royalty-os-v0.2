@@ -1,0 +1,681 @@
+royalty_os_spec:
+spec_id: "royalty-os-v0.2"
+title: "Royalty OS v0.2"
+subtitle: "Event-Based Trace-to-Value Circulation Architecture"
+version: "0.2.0-draft"
+status: "draft"
+date_created: "2026-06-04"
+license: "MIT"
+language: "en"
+
+maintainers:
+- name: "SamuraiWriter7"
+role: "originator"
+
+summary: >
+Royalty OS v0.2 is an experimental event-based architecture for
+connecting traceable human-originated thought to dynamic value circulation.
+It extends the static Royalty OS v0.1 record model into an append-only
+value event log with review, allocation, and return history layers.
+
+base_version:
+previous_spec_id: "royalty-os-v0.1"
+relationship: "event-based extension"
+description: >
+Royalty OS v0.1 defines the static minimum recognition model.
+Royalty OS v0.2 extends that model into an event-based value
+circulation architecture.
+
+purpose:
+- "Represent value circulation as an evolving event history."
+- "Record references, reviews, value signals, allocation decisions, and returns over time."
+- "Support AI-assisted detection while preserving human review."
+- "Introduce modular schema architecture."
+- "Prepare for future Q-Point, attribution scoring, dashboards, and compensation mechanisms."
+
+non_goals:
+- "Legally binding royalty enforcement"
+- "Automatic payment execution"
+- "Universal AI training data tracking"
+- "Copyright dispute resolution"
+- "Court-admissible ownership proof"
+- "Mandatory blockchain storage"
+- "Complete platform monetization"
+
+core_principles:
+- principle_id: "origin_remains_visible"
+name: "Origin Remains Visible"
+description: >
+Human-originated thought should remain connected to its origin even
+when referenced, summarized, transformed, or reused.
+
+```
+- principle_id: "append_only_history"
+  name: "Append-Only History"
+  description: >
+    Value circulation should be recorded as an append-only event history.
+    Existing events should not be silently rewritten.
+
+- principle_id: "detection_is_not_judgment"
+  name: "Detection Is Not Judgment"
+  description: >
+    AI may detect possible references or dependencies, but human review
+    remains important for judgment, especially for high-impact events.
+
+- principle_id: "review_before_high_impact_allocation"
+  name: "Review Before High-Impact Allocation"
+  description: >
+    High-impact allocation decisions should normally require approved
+    review before return or compensation is recorded.
+
+- principle_id: "return_history_separates_intent_from_completion"
+  name: "Return History Separates Intent From Completion"
+  description: >
+    Allocation decisions define what should return. Return records define
+    what actually returned.
+
+- principle_id: "non_monetary_first"
+  name: "Non-Monetary First"
+  description: >
+    v0.2 prioritizes citation, linkback, conceptual attribution,
+    repository reference, acknowledgement, and visible recognition before
+    monetary compensation.
+```
+
+conceptual_flow:
+- step: 1
+name: "Origin"
+description: "The human-originated source of a question, concept, structure, protocol, specification, essay, or creative work."
+
+```
+- step: 2
+  name: "Trace Record"
+  description: "A structured record of origin and lineage."
+
+- step: 3
+  name: "Value Event Log"
+  description: "An append-only sequence of events related to references, reviews, value signals, allocations, corrections, disputes, and returns."
+
+- step: 4
+  name: "Review Layer"
+  description: "A layer for AI-assisted detection, human review, evidence assessment, confidence scoring, disputes, and corrections."
+
+- step: 5
+  name: "Dynamic Value Signal"
+  description: "A value signal that can evolve over time as new events, reviews, and evidence appear."
+
+- step: 6
+  name: "Allocation Layer"
+  description: "A layer for determining proposed or approved return methods based on reviewed value signals."
+
+- step: 7
+  name: "Return History"
+  description: "A record of completed value returns, including attribution, citation, linkback, acknowledgement, point allocation, or future compensation."
+```
+
+architecture_layers:
+- layer_id: "origin_layer"
+name: "Origin Layer"
+purpose: "Record human-originated sources."
+primary_objects:
+- "origin_record"
+
+```
+- layer_id: "trace_layer"
+  name: "Trace Layer"
+  purpose: "Record origin lineage and conceptual ancestry."
+  primary_objects:
+    - "trace_record"
+
+- layer_id: "value_event_log"
+  name: "Value Event Log"
+  purpose: "Record meaningful changes in value circulation as events."
+  primary_objects:
+    - "value_event"
+    - "value_event_log"
+
+- layer_id: "review_layer"
+  name: "Review Layer"
+  purpose: "Evaluate detected references, evidence quality, value signal strength, and disputes."
+  primary_objects:
+    - "review_record"
+
+- layer_id: "allocation_layer"
+  name: "Allocation Layer"
+  purpose: "Connect reviewed value signals to proposed or approved return methods."
+  primary_objects:
+    - "allocation_decision"
+
+- layer_id: "return_history_layer"
+  name: "Return History Layer"
+  purpose: "Record completed return or recognition."
+  primary_objects:
+    - "return_record"
+```
+
+data_model:
+origin_record:
+required_fields:
+- "origin_id"
+- "origin_type"
+- "title"
+- "creator"
+- "first_published"
+- "primary_url"
+optional_fields:
+- "description"
+- "language"
+- "license"
+- "repository"
+- "related_origins"
+- "notes"
+allowed_origin_types:
+- "human_originated_thought"
+- "question"
+- "concept"
+- "essay"
+- "protocol"
+- "specification"
+- "technical_design"
+- "philosophical_model"
+- "creative_work"
+- "research_note"
+- "ai_assisted_human_originated_work"
+
+```
+trace_record:
+  required_fields:
+    - "trace_id"
+    - "origin_id"
+    - "core_question"
+    - "related_concepts"
+    - "lineage"
+    - "version"
+  optional_fields:
+    - "trace_url"
+    - "derived_concepts"
+    - "previous_versions"
+    - "notes"
+
+value_event_log:
+  required_fields:
+    - "log_id"
+    - "origin_id"
+    - "trace_id"
+    - "events"
+  optional_fields:
+    - "created_at"
+    - "updated_at"
+    - "log_status"
+    - "notes"
+
+value_event:
+  required_fields:
+    - "event_id"
+    - "event_type"
+    - "event_time"
+    - "origin_id"
+    - "trace_id"
+    - "actor"
+    - "target"
+    - "evidence"
+    - "status"
+  optional_fields:
+    - "event_index"
+    - "value_signal"
+    - "review"
+    - "allocation_reference"
+    - "return_reference"
+    - "related_events"
+    - "correction"
+    - "dispute"
+    - "notes"
+
+actor:
+  required_fields:
+    - "actor_type"
+    - "actor_id"
+  optional_fields:
+    - "role"
+    - "name"
+    - "url"
+  allowed_actor_types:
+    - "human"
+    - "ai_system"
+    - "repository"
+    - "platform"
+    - "organization"
+    - "protocol"
+    - "unknown"
+
+target:
+  required_fields:
+    - "target_type"
+    - "title"
+  optional_fields:
+    - "url"
+    - "repository"
+    - "description"
+    - "hash"
+  allowed_target_types:
+    - "article"
+    - "repository"
+    - "specification"
+    - "protocol"
+    - "essay"
+    - "book"
+    - "ai_output"
+    - "dataset"
+    - "web_page"
+    - "social_post"
+    - "unknown"
+
+evidence:
+  required_fields:
+    - "evidence_type"
+  optional_fields:
+    - "url"
+    - "description"
+    - "quote"
+    - "repository_commit"
+    - "hash"
+    - "doi"
+    - "manual_note"
+    - "ai_detection_report"
+  allowed_evidence_types:
+    - "url"
+    - "quote"
+    - "repository_commit"
+    - "citation"
+    - "screenshot_reference"
+    - "hash"
+    - "doi"
+    - "manual_note"
+    - "ai_detection_report"
+    - "unknown"
+
+value_signal:
+  required_fields:
+    - "signal_type"
+    - "signal_strength"
+  optional_fields:
+    - "signal_score"
+    - "confidence"
+    - "review_method"
+    - "notes"
+  allowed_signal_types:
+    - "citation"
+    - "linkback"
+    - "conceptual_reference"
+    - "structural_dependency"
+    - "implementation_dependency"
+    - "translation"
+    - "summary"
+    - "derivative_work"
+    - "commercial_use"
+    - "educational_use"
+    - "research_use"
+    - "ai_reference"
+    - "community_recognition"
+  allowed_signal_strength:
+    - "low"
+    - "medium"
+    - "high"
+    - "critical"
+
+review_record:
+  required_fields:
+    - "review_id"
+    - "reviewed_event_id"
+    - "review_time"
+    - "reviewer"
+    - "review_status"
+    - "review_decision"
+    - "evidence_assessment"
+    - "confidence"
+  optional_fields:
+    - "ai_assisted"
+    - "human_review_required"
+    - "recommended_signal_strength"
+    - "recommended_allocation"
+    - "review_notes"
+    - "related_reviews"
+  allowed_review_status:
+    - "not_required"
+    - "pending"
+    - "approved"
+    - "rejected"
+    - "needs_more_evidence"
+    - "disputed"
+    - "superseded"
+    - "archived"
+  allowed_review_decisions:
+    - "valid_reference"
+    - "valid_conceptual_reference"
+    - "valid_structural_dependency"
+    - "valid_implementation_dependency"
+    - "valid_derivative_work"
+    - "insufficient_evidence"
+    - "not_meaningful_reference"
+    - "false_positive"
+    - "overclaimed_dependency"
+    - "requires_correction"
+    - "requires_dispute_resolution"
+
+allocation_decision:
+  required_fields:
+    - "allocation_id"
+    - "based_on_events"
+    - "origin_id"
+    - "trace_id"
+    - "allocation_type"
+    - "return_methods"
+    - "allocation_status"
+    - "created_at"
+  optional_fields:
+    - "allocation_policy"
+    - "recipient"
+    - "recipients"
+    - "allocation_reason"
+    - "allocation_ratio"
+    - "priority"
+    - "review_reference"
+    - "value_signal_reference"
+    - "expected_return"
+    - "notes"
+  allowed_allocation_types:
+    - "non_monetary"
+    - "monetary"
+    - "hybrid"
+    - "experimental"
+  allowed_allocation_status:
+    - "draft"
+    - "proposed"
+    - "pending_review"
+    - "approved"
+    - "rejected"
+    - "completed"
+    - "superseded"
+    - "disputed"
+    - "archived"
+  allowed_return_methods:
+    - "citation"
+    - "linkback"
+    - "credit"
+    - "conceptual_attribution"
+    - "version_lineage"
+    - "repository_reference"
+    - "acknowledgement"
+    - "collaboration_offer"
+    - "licensing_request"
+    - "financial_compensation"
+    - "royalty_payment"
+    - "point_allocation"
+    - "token_reward"
+    - "q_point_allocation"
+    - "resonance_score_update"
+
+return_record:
+  required_fields:
+    - "return_id"
+    - "allocation_id"
+    - "return_type"
+    - "recipient"
+    - "completed_at"
+    - "status"
+  optional_fields:
+    - "evidence_url"
+    - "evidence_description"
+    - "notes"
+  allowed_return_types:
+    - "citation"
+    - "linkback"
+    - "credit"
+    - "conceptual_attribution"
+    - "repository_reference"
+    - "acknowledgement"
+    - "point_allocation"
+    - "token_reward"
+    - "financial_compensation"
+    - "royalty_payment"
+  allowed_return_status:
+    - "pending"
+    - "completed"
+    - "failed"
+    - "disputed"
+    - "superseded"
+    - "archived"
+```
+
+event_model:
+append_only: true
+mutation_policy: >
+Existing events should not be silently modified. Corrections,
+disputes, review changes, and status changes should be recorded as
+new events.
+
+```
+event_ordering:
+  primary_order: "event_time"
+  optional_order_fields:
+    - "event_index"
+    - "created_at"
+    - "log_order"
+
+allowed_event_status:
+  - "draft"
+  - "pending"
+  - "pending_review"
+  - "approved"
+  - "rejected"
+  - "disputed"
+  - "completed"
+  - "superseded"
+  - "retracted"
+  - "archived"
+
+event_types:
+  origin_events:
+    - "origin_registered"
+    - "origin_updated"
+    - "origin_deprecated"
+
+  trace_events:
+    - "trace_created"
+    - "trace_updated"
+    - "trace_linked"
+    - "trace_version_updated"
+
+  reference_events:
+    - "reference_detected"
+    - "citation_added"
+    - "linkback_added"
+    - "conceptual_reference_detected"
+    - "structural_dependency_detected"
+    - "implementation_dependency_detected"
+    - "derivative_work_registered"
+    - "translation_registered"
+    - "summary_registered"
+
+  ai_related_events:
+    - "ai_reference_detected"
+    - "ai_similarity_detected"
+    - "ai_summary_detected"
+    - "ai_derivative_detected"
+    - "ai_assisted_review_created"
+
+  review_events:
+    - "human_review_requested"
+    - "human_review_completed"
+    - "review_rejected"
+    - "review_disputed"
+    - "review_reopened"
+
+  value_signal_events:
+    - "value_signal_created"
+    - "value_signal_updated"
+    - "value_signal_downgraded"
+    - "value_signal_upgraded"
+    - "value_signal_disputed"
+
+  allocation_events:
+    - "allocation_decision_created"
+    - "allocation_decision_updated"
+    - "allocation_decision_approved"
+    - "allocation_decision_rejected"
+    - "allocation_decision_superseded"
+    - "allocation_decision_disputed"
+    - "allocation_decision_completed"
+
+  return_events:
+    - "return_recorded"
+    - "citation_return_completed"
+    - "linkback_return_completed"
+    - "credit_return_completed"
+    - "repository_reference_completed"
+    - "acknowledgement_completed"
+    - "point_allocation_recorded"
+    - "compensation_recorded"
+
+  correction_events:
+    - "correction_added"
+    - "event_retracted"
+    - "evidence_updated"
+    - "status_updated"
+```
+
+review_layer:
+review_requirement_levels:
+- "none"
+- "optional"
+- "recommended"
+- "required"
+
+```
+events_usually_requiring_review:
+  - "ai_reference_detected"
+  - "ai_similarity_detected"
+  - "ai_derivative_detected"
+  - "conceptual_reference_detected"
+  - "structural_dependency_detected"
+  - "implementation_dependency_detected"
+  - "derivative_work_registered"
+  - "commercial_reference_detected"
+  - "value_signal_upgraded"
+  - "allocation_decision_created"
+  - "compensation_recorded"
+
+events_may_skip_review_when_evidence_is_clear:
+  - "citation_added"
+  - "linkback_added"
+  - "repository_reference_completed"
+  - "acknowledgement_completed"
+  - "origin_registered"
+  - "trace_created"
+  - "version_updated"
+
+ai_review_policy:
+  ai_may:
+    - "detect references"
+    - "summarize evidence"
+    - "suggest value signal strength"
+    - "flag possible disputes"
+    - "recommend review priority"
+  ai_should_not:
+    - "approve high-impact value events without human review"
+    - "assign final allocation"
+    - "declare ownership"
+    - "settle disputes"
+    - "trigger compensation"
+    - "erase or rewrite past events"
+```
+
+allocation_layer:
+default_policy: "non_monetary_first"
+recommended_policies:
+- "origin_recognition_first"
+- "review_required_before_allocation"
+- "non_monetary_first"
+- "human_review_required_for_high_value"
+- "manual_approval_required"
+- "q_point_assisted"
+- "experimental_dynamic_allocation"
+
+```
+signal_strength_guidance:
+  low:
+    suggested_allocation:
+      - "optional citation"
+      - "optional note"
+  medium:
+    suggested_allocation:
+      - "citation"
+      - "linkback"
+      - "attribution"
+  high:
+    suggested_allocation:
+      - "citation"
+      - "linkback"
+      - "conceptual attribution"
+      - "repository reference"
+  critical:
+    suggested_allocation:
+      - "full attribution"
+      - "repository reference"
+      - "acknowledgement"
+      - "possible licensing or compensation review"
+```
+
+relationship_to_v0_1:
+v0_1_role: "static minimum recognition model"
+v0_2_role: "event-based value circulation architecture"
+migration_concept:
+- "origin -> origin_registered event"
+- "trace -> trace_created event"
+- "reference_event -> reference_detected event"
+- "value_signal -> value_signal_created event"
+- "allocation -> allocation_decision_created event"
+- "return_methods -> allocation decision plus return records"
+
+recommended_repository_structure:
+- "docs/architecture.md"
+- "docs/event-model.md"
+- "docs/review-layer.md"
+- "docs/allocation-layer.md"
+- "docs/relationship-to-v0.1.md"
+- "spec/royalty-os-v0.2.yaml"
+- "schemas/origin.schema.json"
+- "schemas/trace.schema.json"
+- "schemas/value-event.schema.json"
+- "schemas/review.schema.json"
+- "schemas/allocation.schema.json"
+- "schemas/return.schema.json"
+- "schemas/royalty-os-record.schema.json"
+- "examples/origin-record.example.yaml"
+- "examples/trace-record.example.yaml"
+- "examples/value-event-log.example.yaml"
+- "examples/review-record.example.yaml"
+- "examples/allocation-decision.example.yaml"
+- "scripts/validate_examples.py"
+- ".github/workflows/validate-royalty-os-v0.2.yml"
+
+future_extensions:
+- "Q-Point Protocol integration"
+- "Signed value event logs"
+- "Cryptographic timestamping"
+- "Decentralized identifiers"
+- "Trace graph visualization"
+- "AI-assisted lineage mapping"
+- "Human review workflow engine"
+- "Attribution scoring"
+- "Resonance scoring"
+- "Creator dashboard"
+- "Compensation mechanisms"
+- "Cross-platform trace registries"
+
+summary: >
+Royalty OS v0.2 transforms the Royalty OS model from a static
+recognition record into an event-based value circulation architecture.
+It introduces append-only event logs, AI-assisted detection, human review,
+dynamic value signals, allocation decisions, and return history while
+preserving the v0.1 origin-trace-value chain.
