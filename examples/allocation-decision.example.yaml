@@ -1,0 +1,71 @@
+allocation_id: "allocation-001"
+
+based_on_events:
+
+* "event-003"
+* "event-004"
+* "event-005"
+
+origin_id: "epicenter-network-001"
+trace_id: "trace-protocol-001"
+
+allocation_type: "non_monetary"
+
+return_methods:
+
+* "citation"
+* "linkback"
+* "conceptual_attribution"
+* "repository_reference"
+
+allocation_status: "approved"
+
+created_at: "2026-06-04T01:15:00Z"
+updated_at: "2026-06-04T01:15:00Z"
+
+allocation_policy:
+policy_id: "origin-recognition-first"
+policy_type: "non_monetary_first"
+description: >
+Prioritize citation, linkback, conceptual attribution,
+and repository reference before any monetary compensation mechanism.
+
+recipient:
+recipient_type: "human"
+recipient_id: "SamuraiWriter7"
+recipient_role: "originator"
+name: "SamuraiWriter7"
+url: "https://github.com/SamuraiWriter7"
+
+allocation_reason: >
+The reviewed value event confirms that Royalty OS directly builds on
+the Epicenter Network and Trace Protocol lineage. Therefore, visible
+non-monetary return is appropriate through citation, linkback,
+conceptual attribution, and repository reference.
+
+allocation_ratio: null
+
+priority: "medium"
+
+review_reference:
+review_id: "review-001"
+review_status: "approved"
+confidence: 0.9
+
+value_signal_reference:
+signal_id: "value-signal-001"
+signal_type: "conceptual_reference"
+signal_strength: "high"
+confidence: 0.9
+
+expected_return:
+expected_return_type: "mixed"
+description: >
+Expected return includes citation, linkback, conceptual attribution,
+and repository reference within Royalty OS v0.2 documentation.
+
+notes: >
+This allocation decision connects the approved conceptual reference
+to non-monetary value return. It does not execute payment or legal
+royalty enforcement. It records the appropriate return methods for
+origin recognition in the v0.2 event-based architecture.
