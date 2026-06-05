@@ -18,6 +18,14 @@ This project follows a lightweight versioning model during the early draft and e
 
   * `docs/architecture.md`
 
+* Added circulation model documentation.
+
+  * `docs/circulation-model.md`
+
+* Added layer diagram documentation.
+
+  * `docs/layer-diagram.md`
+
 * Added event model documentation.
 
   * `docs/event-model.md`
@@ -65,6 +73,25 @@ This project follows a lightweight versioning model during the early draft and e
 
   * `.github/workflows/validate-royalty-os-v0.2.yml`
 
+* Added citation metadata.
+
+  * `CITATION.cff`
+
+---
+
+## Updated
+
+* Updated `README.md` to include:
+
+  * `docs/circulation-model.md`
+  * `docs/layer-diagram.md`
+  * expanded repository structure
+  * updated key documents
+  * circulation model summary
+  * layer diagram summary
+  * updated recommended reading order
+  * citation guidance
+
 ---
 
 ## Defined
@@ -109,21 +136,93 @@ Return History
 
 ---
 
+### Circulation Model
+
+Defined Royalty OS v0.2 as a circulation model rather than a simple attribution log.
+
+Core circulation flow:
+
+```text
+Human Origin
+  ↓
+Trace Record
+  ↓
+Value Event Log
+  ↓
+Review Layer
+  ↓
+Dynamic Value Signal
+  ↓
+Allocation Layer
+  ↓
+Return History
+  ↓
+Renewed Origin / New Trace
+```
+
+The circulation model clarifies that value should not move in only one direction.
+
+It defines the return loop where returned value may become the seed of new creation.
+
+Core principle:
+
+```text
+Value should return to the origin and become the seed of new creation.
+```
+
+---
+
+### Layer Diagram
+
+Defined the six-layer architecture of Royalty OS v0.2.
+
+The six layers are:
+
+```text
+1. Origin Layer
+2. Trace Layer
+3. Value Event Log Layer
+4. Review Layer
+5. Allocation Layer
+6. Return History Layer
+```
+
+Each layer has a distinct responsibility:
+
+| Layer                 | Responsibility                                   | Main Object                      |
+| --------------------- | ------------------------------------------------ | -------------------------------- |
+| Origin Layer          | Record the human-originated source               | `origin_record`                  |
+| Trace Layer           | Record origin lineage and conceptual ancestry    | `trace_record`                   |
+| Value Event Log Layer | Record meaningful value-related events over time | `value_event_log`, `value_event` |
+| Review Layer          | Separate AI detection from human judgment        | `review_record`                  |
+| Allocation Layer      | Decide appropriate return methods                | `allocation_decision`            |
+| Return History Layer  | Record completed return or recognition           | `return_record`                  |
+
+This layer separation prevents confusion between:
+
+* origin and output
+* detection and judgment
+* signal and allocation
+* allocation and return
+* correction and erasure
+
+---
+
 ### Value Event Log
 
 Defined the Value Event Log as an append-only record of value circulation events.
 
 Initial event families include:
 
-* origin events,
-* trace events,
-* reference events,
-* AI-related events,
-* review events,
-* value signal events,
-* allocation events,
-* return events,
-* correction events.
+* origin events
+* trace events
+* reference events
+* AI-related events
+* review events
+* value signal events
+* allocation events
+* return events
+* correction events
 
 Example flow:
 
@@ -159,14 +258,14 @@ The event log should preserve both.
 
 The Review Layer includes:
 
-* review statuses,
-* review requirement levels,
-* AI-assisted review,
-* human review,
-* evidence assessment,
-* confidence scoring,
-* dispute handling,
-* correction handling.
+* review statuses
+* review requirement levels
+* AI-assisted review
+* human review
+* evidence assessment
+* confidence scoring
+* dispute handling
+* correction handling
 
 ---
 
@@ -188,19 +287,19 @@ Return Record
 
 Allocation types include:
 
-* non-monetary,
-* monetary,
-* hybrid,
-* experimental.
+* non-monetary
+* monetary
+* hybrid
+* experimental
 
 v0.2 prioritizes non-monetary value return, including:
 
-* citation,
-* linkback,
-* conceptual attribution,
-* repository reference,
-* acknowledgement,
-* version lineage.
+* citation
+* linkback
+* conceptual attribution
+* repository reference
+* acknowledgement
+* version lineage
 
 ---
 
@@ -245,12 +344,12 @@ Added `schemas/royalty-os-record.schema.json` as the root schema for complete Ro
 
 It connects:
 
-* origin,
-* trace,
-* value event log,
-* review records,
-* allocation decisions,
-* return records.
+* origin
+* trace
+* value event log
+* review records
+* allocation decisions
+* return records
 
 ---
 
@@ -290,18 +389,18 @@ Royalty OS v0.2
 
 Added validation support for:
 
-* modular JSON Schema files,
-* example YAML files,
-* value event log events,
-* duplicate event IDs,
-* cross-file consistency checks.
+* modular JSON Schema files
+* example YAML files
+* value event log events
+* duplicate event IDs
+* cross-file consistency checks
 
 The validation script checks:
 
-* all schema files are valid JSON Schemas,
-* each example matches its corresponding schema,
-* each event in the value event log matches `value-event.schema.json`,
-* core identifiers are consistent across examples.
+* all schema files are valid JSON Schemas
+* each example matches its corresponding schema
+* each event in the value event log matches `value-event.schema.json`
+* core identifiers are consistent across examples
 
 Run validation:
 
@@ -329,9 +428,9 @@ Workflow file:
 
 The workflow runs on:
 
-* push to `main` or `master`,
-* pull request to `main` or `master`,
-* manual workflow dispatch.
+* push to `main` or `master`
+* pull request to `main` or `master`
+* manual workflow dispatch
 
 ---
 
@@ -359,14 +458,14 @@ v0.2 records the movement of value.
 
 Royalty OS v0.2 does not provide:
 
-* legal royalty enforcement,
-* automatic payment execution,
-* complete copyright protection,
-* universal AI training data tracking,
-* court-admissible ownership proof,
-* mandatory blockchain storage,
-* final ownership decisions,
-* full monetization infrastructure.
+* legal royalty enforcement
+* automatic payment execution
+* complete copyright protection
+* universal AI training data tracking
+* court-admissible ownership proof
+* mandatory blockchain storage
+* final ownership decisions
+* full monetization infrastructure
 
 v0.2 remains an experimental event architecture.
 
@@ -378,18 +477,18 @@ Its goal is to model the movement of value, not to enforce all consequences.
 
 Possible future extensions include:
 
-* Q-Point Protocol integration,
-* signed value event logs,
-* cryptographic timestamping,
-* decentralized identifiers,
-* trace graph visualization,
-* AI-assisted lineage mapping,
-* human review workflow engine,
-* attribution scoring,
-* resonance scoring,
-* creator dashboard,
-* compensation mechanisms,
-* cross-platform trace registries.
+* Q-Point Protocol integration
+* signed value event logs
+* cryptographic timestamping
+* decentralized identifiers
+* trace graph visualization
+* AI-assisted lineage mapping
+* human review workflow engine
+* attribution scoring
+* resonance scoring
+* creator dashboard
+* compensation mechanisms
+* cross-platform trace registries
 
 ---
 
@@ -401,18 +500,26 @@ Royalty OS v0.1 established the first minimum structure.
 
 Royalty OS v0.2 introduces:
 
-* append-only value events,
-* modular schemas,
-* AI-assisted review,
-* human verification,
-* dynamic value signals,
-* allocation decisions,
-* return history.
+* append-only value events
+* modular schemas
+* AI-assisted review
+* human verification
+* dynamic value signals
+* allocation decisions
+* return history
+* circulation model
+* layer diagram
 
 Core principle:
 
 ```text
 Value circulation should be recorded as an evolving event history.
+```
+
+Circulation principle:
+
+```text
+Value should return to the origin and become the seed of new creation.
 ```
 
 Royalty OS v0.2 starts here.
